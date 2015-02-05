@@ -8,6 +8,8 @@ import org.junit.Test;
 import nl.han.tictactoe.*;
 import nl.han.tictactoe.TicTacToe.State;
 
+import nl.han.bots.*;
+
 @SuppressWarnings("javadoc")
 public class TestTTT {
     TicTacToe ttt;
@@ -140,5 +142,27 @@ public class TestTTT {
         ttt.place(2, 1);
 
         assertEquals(ttt.getWinner(), State.DRAW);
+    }
+
+    @Test
+    public void playRandomBot() {
+        Bot bot = new BotRandom();
+
+        bot.doMove(ttt);
+
+        assertNotEquals(ttt.getBoard(), 0L);
+    }
+
+    @Test(timeout = 50)
+    public void playRandomBotGame() {
+        Bot playerX = new BotRandom();
+        Bot playerO = new BotRandom();
+
+        while(ttt.getWinner() == State.BLANK) {
+            if (ttt.getCurrentPlayer() == State.X)
+                playerX.doMove(ttt);
+            else
+                playerO.doMove(ttt);
+        }
     }
 }
