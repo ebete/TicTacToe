@@ -159,7 +159,20 @@ public class TestTTT {
         Bot playerO = new BotRandom();
 
         while(ttt.getWinner() == State.BLANK) {
-            if (ttt.getCurrentPlayer() == State.X)
+            if(ttt.getCurrentPlayer() == State.X)
+                playerX.doMove(ttt);
+            else
+                playerO.doMove(ttt);
+        }
+    }
+
+    @Test(timeout = 50)
+    public void playRandomLearningBotGame() {
+        Bot playerX = new BotRandom();
+        Bot playerO = new BotLearning();
+
+        while(ttt.getWinner() == State.BLANK) {
+            if(ttt.getCurrentPlayer() == State.X)
                 playerX.doMove(ttt);
             else
                 playerO.doMove(ttt);

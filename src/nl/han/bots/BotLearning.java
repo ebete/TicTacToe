@@ -28,7 +28,7 @@ public class BotLearning implements Bot {
     }
     
     private boolean calculateMove(TicTacToe game) {
-        
+        return false;
     }
 
     @Override
