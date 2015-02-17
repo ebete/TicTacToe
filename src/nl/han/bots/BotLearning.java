@@ -1,6 +1,7 @@
 package nl.han.bots;
 
 import nl.han.tictactoe.TicTacToe;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Random;
 
@@ -24,11 +25,11 @@ public class BotLearning implements Bot {
             row = new Random().nextInt(game.BOARD_DIMS);
             col = new Random().nextInt(game.BOARD_DIMS);
         } while(!game.place(row, col));
-        
     }
     
     private boolean calculateMove(TicTacToe game) {
-        return false;
+        //TODO: Add implementation for move calculation.
+        throw new NotImplementedException();
     }
 
     @Override
