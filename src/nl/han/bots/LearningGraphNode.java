@@ -11,6 +11,8 @@ import java.util.ArrayList;
  * @author Thom Griffioen
  */
 public class LearningGraphNode {
+    private final int VALUE_CUTOOFF = -50;
+    
     private LearningGraphNode _parent = null;
     private ArrayList<LearningGraphNode> _children = new ArrayList<>();
     private int _weight = 0;
@@ -28,7 +30,7 @@ public class LearningGraphNode {
     }
 
     /**
-     * Moves to the node with the given value.
+     * Returns the node with the given value.
      * If it doesn't exist, it will be created.
      * 
      * @param value The node value to find.
@@ -46,14 +48,26 @@ public class LearningGraphNode {
     }
 
     /**
-     * Calculates the move with the highest
-     * probability of winning in the previous rounds.
+     * Returns the node with the highest
+     * probability of winning in the previous rounds
+     * or returns null signalling to do a move that has yet
+     * to be created. This happens if the best node has a value that
+     * lies below a certain threshold or no nodes are attached.
      * 
-     * @return The node with the highest winning rate.
+     * @return The node with the highest winning rate or {@code null}.
      */
     public LearningGraphNode calculateBestMove() {
-        // TODO: Add calculate best move implementation.
-        throw new NotImplementedException();
+        LearningGraphNode bestNode = null;
+        
+        for(LearningGraphNode node : _children) {
+            if(bestNode == null || bestNode.getValue() < node.getValue())
+                bestNode = node;
+        }
+
+        if(bestNode == null || bestNode.getValue() < VALUE_CUTOOFF)
+            return null;
+        else
+            return bestNode;
     }
 
     /**
