@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author Thom Griffioen
  */
 public class LearningGraphNode {
-    private final int VALUE_CUTOOFF = -50;
+    private final int WEIGHT_CUTOFF = -50;
     
     private LearningGraphNode _parent = null;
     private ArrayList<LearningGraphNode> _children = new ArrayList<>();
@@ -60,11 +60,11 @@ public class LearningGraphNode {
         LearningGraphNode bestNode = null;
         
         for(LearningGraphNode node : _children) {
-            if(bestNode == null || bestNode.getValue() < node.getValue())
+            if(bestNode == null || bestNode.getWeight() < node.getWeight())
                 bestNode = node;
         }
 
-        if(bestNode == null || bestNode.getValue() < VALUE_CUTOOFF)
+        if(bestNode == null || bestNode.getWeight() < WEIGHT_CUTOFF)
             return null;
         else
             return bestNode;
