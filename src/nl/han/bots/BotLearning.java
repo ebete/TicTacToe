@@ -11,6 +11,9 @@ import java.util.Random;
  * @author Thom Griffioen
  */
 public class BotLearning implements Bot {
+    private int _roundsPlayed = 0;
+    private int _roundsWon = 0;
+    
     private LearningGraphNode graph = new LearningGraphNode(null, 0L);
 
     private void randomMove(TicTacToe game) {
@@ -54,6 +57,18 @@ public class BotLearning implements Bot {
     private boolean importTree() {
         // TODO: Add the tree import functionality.
         throw new NotImplementedException();
+    }
+
+    @Override
+    public void roundEnd(boolean won) {
+        ++_roundsPlayed;
+        if(won)
+            ++_roundsWon;
+    }
+
+    @Override
+    public float getWinRate() {
+        return (float)_roundsWon / (float)_roundsPlayed;
     }
 
     @Override

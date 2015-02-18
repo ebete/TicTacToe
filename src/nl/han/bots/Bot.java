@@ -17,6 +17,20 @@ public interface Bot {
     public void doMove(TicTacToe game);
 
     /**
+     * Called at the end of each round.
+     *
+     * @param won True if the bot won that round, otherwise false.
+     */
+    public void roundEnd(boolean won);
+
+    /**
+     * Returns the win rate of the bot.
+     *
+     * @return The win rate.
+     */
+    public float getWinRate();
+
+    /**
      * Gets the name of the bot.
      * @return The name
      */
