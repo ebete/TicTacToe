@@ -48,7 +48,7 @@ public class LearningGraphNode {
     /**
      * Returns the node with the highest
      * probability of winning in the previous rounds
-     * or returns null signalling to do a move that has yet
+     * or returns {@code null} signalling to do a move that has yet
      * to be created. This happens if the best node has a weight that
      * lies below a certain threshold or no nodes are attached.
      * 

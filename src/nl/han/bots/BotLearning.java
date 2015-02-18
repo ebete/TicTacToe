@@ -11,12 +11,8 @@ import java.util.Random;
  * @author Thom Griffioen
  */
 public class BotLearning implements Bot {
-    @Override
-    public void doMove(TicTacToe game) {
-        if(!calculateMove(game))
-            randomMove(game);
-    }
-    
+    private LearningGraphNode graph = new LearningGraphNode(null, 0L);
+
     private void randomMove(TicTacToe game) {
         int row;
         int col;
@@ -26,10 +22,18 @@ public class BotLearning implements Bot {
             col = new Random().nextInt(game.BOARD_DIMS);
         } while(!game.place(row, col));
     }
-    
-    private boolean calculateMove(TicTacToe game) {
-        //TODO: Add implementation for move calculation.
-        throw new NotImplementedException();
+
+    @Override
+    public void doMove(TicTacToe game) {
+        //TODO: Finalize implementation for move calculation.
+        graph = graph.moveToNode(game.getBoard());
+
+        if(graph.calculateBestMove() == null) {
+            randomMove(game);
+            graph = graph.moveToNode(game.getBoard());
+        } else {
+            graph = graph.calculateBestMove();
+        }
     }
 
     /**
