@@ -166,6 +166,29 @@ public class TestTTT {
         }
     }
 
+    @Test(timeout = 500)
+    public void botWinRate() {
+        Bot playerX = new BotRandom();
+        Bot playerO = new BotRandom();
+
+        for (int i = 0; i < 50; i++) {
+            while(ttt.getWinner() == State.BLANK) {
+                if(ttt.getCurrentPlayer() == State.X)
+                    playerX.doMove(ttt);
+                else
+                    playerO.doMove(ttt);
+            }
+
+            playerX.roundEnd(ttt.getWinner() == State.X);
+            playerO.roundEnd(ttt.getWinner() == State.O);
+            
+            ttt.resetBoard();
+        }
+
+        System.out.println(String.format("Bot X win rate: %.1f%%", playerX.getWinRate()*100));
+        System.out.println(String.format("Bot O win rate: %.1f%%", playerO.getWinRate()*100));
+    }
+
     @Test(timeout = 50)
     public void playRandomLearningBotGame() {
         Bot playerX = new BotRandom();
