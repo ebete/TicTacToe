@@ -32,6 +32,26 @@ public class BotLearning implements Bot {
         throw new NotImplementedException();
     }
 
+    /**
+     * Export the tree to a file.
+     *
+     * @return True on success, otherwise false.
+     */
+    private boolean exportTree() {
+        // TODO: Add the tree export functionality.
+        throw new NotImplementedException();
+    }
+
+    /**
+     * Import the tree from a file.
+     *
+     * @return True on success, otherwise false.
+     */
+    private boolean importTree() {
+        // TODO: Add the tree import functionality.
+        throw new NotImplementedException();
+    }
+
     @Override
     public String getName() { return "Bot learning"; }
 }

@@ -103,24 +103,4 @@ public class LearningGraphNode {
         if(_parent != null)
             _parent.loseSituation();
     }
-    
-    /**
-     * Export the tree to a file.
-     *
-     * @return True on success, otherwise false.
-     */
-    public boolean exportTree() {
-        // TODO: Add the tree export functionality.
-        throw new NotImplementedException();
-    }
-
-    /**
-     * Import the tree from a file.
-     *
-     * @return True on success, otherwise false.
-     */
-    public boolean importTree() {
-        // TODO: Add the tree import functionality.
-        throw new NotImplementedException();
-    }
 }
