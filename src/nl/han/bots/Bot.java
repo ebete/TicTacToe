@@ -32,7 +32,7 @@ public interface Bot {
 
     /**
      * Gets the name of the bot.
-     * @return The name
+     * @return The name.
      */
     public String getName();
 }

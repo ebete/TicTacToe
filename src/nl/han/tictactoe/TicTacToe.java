@@ -19,13 +19,20 @@ public class TicTacToe {
     /** Dimensions of the board. */
     public final byte BOARD_DIMS = 3;
 
+    /** The current player. */
     private State _currentPlayer = State.X;
+    /** The winner of this round or {@code State.BLANK} if no winner has been decided yet. */
     private State _winner = State.BLANK;
+    /** Move counter for this round. */
     private short _moves = 0;
+    /** The unique board state value. */
     private long _board = 0;
 
+    /** The 2 bit representation of a blank cell. */
     private final int _blank = 0b00;
+    /** The 2 bit representation of the token X. */
     private final int _x = 0b01;
+    /** The 2 bit representation of the token O. */
     private final int _o = 0b10;
 
     /**
@@ -78,6 +85,15 @@ public class TicTacToe {
         return true;
     }
 
+    /**
+     * Sets the given cell to the given value. Note
+     * that the given value shouldn't exceed 2 bits in length.
+     * (i.e. the values 0, 1, 2 and 3).
+     * 
+     * @param row The cell row.
+     * @param column The cell column.
+     * @param value The value to set the cell to.
+     */
     private void setPosition(int row, int column, int value) {
         int pos = (row + (column * BOARD_DIMS)) * 2;
         long mask = 0b11 << pos;
@@ -86,16 +102,38 @@ public class TicTacToe {
         _board = (_board & mask) | (value << pos);
     }
 
+    /**
+     * Gets the {@code int} representation of the cell
+     * state at the requested location.
+     * 
+     * @param row The cell row.
+     * @param column The cell column.
+     * @return The cell state value.
+     */
     private int getPosition(int row, int column) {
         int pos = (row + (column * BOARD_DIMS)) * 2;
         long mask = 0b11 << pos;
         return (int) ((_board & mask) >> pos);
     }
 
+    /**
+     * Checks if the cell at the given location is empty.
+     * 
+     * @param row The cell row.
+     * @param column The cell column.
+     * @return True if the cell is empty, otherwise false.
+     */
     private boolean positionEmpty(int row, int column) {
         return getPosition(row, column) == _blank;
     }
 
+    /**
+     * Gets the token at the requested position.
+     *
+     * @param row The cell row.
+     * @param column The cell column.
+     * @return The token at the requested position.
+     */
     private State getToken(int row, int column) {
         int pos = getPosition(row, column);
 
@@ -106,6 +144,12 @@ public class TicTacToe {
         return State.BLANK;
     }
 
+    /**
+     * Checks for a win situation on the last move.
+     * 
+     * @param row The row of the last move.
+     * @param column The column of the last move.
+     */
     private void checkWin(int row, int column) {
         // Check horizontal win.
         for(int i = 0; i < BOARD_DIMS; i++) {
@@ -153,6 +197,7 @@ public class TicTacToe {
             _winner = State.DRAW;
     }
 
+    /** Toggles the current player. */
     private void togglePlayer() {
         if(_currentPlayer == State.X)
             _currentPlayer = State.O;
@@ -161,7 +206,7 @@ public class TicTacToe {
         ++_moves;
     }
 
-    /** @return The board state. */
+    /** @return The board state. Equals {@code 0L} at the start. */
     public long getBoard() {
         return _board;
     }

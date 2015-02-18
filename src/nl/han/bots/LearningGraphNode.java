@@ -9,11 +9,16 @@ import java.util.ArrayList;
  * @author Thom Griffioen
  */
 public class LearningGraphNode {
+    /** The weight cutoff value when deciding the best node. */
     private final int WEIGHT_CUTOFF = -50;
-    
+
+    /** The parent node of this node. */
     private LearningGraphNode _parent = null;
+    /** The children of this node. */
     private ArrayList<LearningGraphNode> _children = new ArrayList<>();
+    /** The weight of this node. */
     private int _weight = 0;
+    /** The value associated with this node. */
     private long _value = 0L;
 
     /**
