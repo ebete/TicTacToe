@@ -29,7 +29,8 @@ public class BotLearning implements Bot {
     @Override
     public void doMove(TicTacToe game) {
         //TODO: Finalize implementation for move calculation.
-        graph = graph.moveToNode(game.getBoard());
+        if(game.getBoard() != 0L)
+            graph = graph.moveToNode(game.getBoard());
 
         if(graph.calculateBestMove() == null) {
             randomMove(game);
