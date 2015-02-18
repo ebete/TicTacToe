@@ -19,9 +19,9 @@ public interface Bot {
     /**
      * Called at the end of each round.
      *
-     * @param won True if the bot won that round, otherwise false.
+     * @param won 1 for a win, 0 for draw and -1 for lose.
      */
-    public void roundEnd(boolean won);
+    public void roundEnd(int won);
 
     /**
      * Returns the win rate of the bot.

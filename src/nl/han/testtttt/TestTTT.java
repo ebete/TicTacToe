@@ -179,8 +179,22 @@ public class TestTTT {
                     playerO.doMove(ttt);
             }
 
-            playerX.roundEnd(ttt.getWinner() == State.X);
-            playerO.roundEnd(ttt.getWinner() == State.O);
+            switch(ttt.getWinner()) {
+                case X:
+                    playerX.roundEnd(1);
+                    playerO.roundEnd(-1);
+                    break;
+
+                case O:
+                    playerX.roundEnd(-1);
+                    playerO.roundEnd(1);
+                    break;
+
+                case DRAW:
+                    playerX.roundEnd(0);
+                    playerO.roundEnd(0);
+                    break;
+            }
             
             ttt.resetBoard();
         }
@@ -203,21 +217,35 @@ public class TestTTT {
         }
     }
 
-    @Test(timeout = 500)
+    @Test(timeout = 30000)
     public void playRandomVersusLearningGame() {
         Bot playerX = new BotRandom();
         Bot playerO = new BotLearning();
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 100000; i++) {
             while(ttt.getWinner() == State.BLANK) {
                 if(ttt.getCurrentPlayer() == State.X)
                     playerX.doMove(ttt);
                 else
                     playerO.doMove(ttt);
             }
+            
+            switch(ttt.getWinner()) {
+                case X:
+                    playerX.roundEnd(1);
+                    playerO.roundEnd(-1);
+                    break;
 
-            playerX.roundEnd(ttt.getWinner() == State.X);
-            playerO.roundEnd(ttt.getWinner() == State.O);
+                case O:
+                    playerX.roundEnd(-1);
+                    playerO.roundEnd(1);
+                    break;
+
+                case DRAW:
+                    playerX.roundEnd(0);
+                    playerO.roundEnd(0);
+                    break;
+            }
 
             ttt.resetBoard();
         }

@@ -60,12 +60,12 @@ public class BotLearning implements Bot {
     }
 
     @Override
-    public void roundEnd(boolean won) {
+    public void roundEnd(int won) {
         ++_roundsPlayed;
-        if(won) {
+        if(won > 0) {
             graph.winSituation();
             ++_roundsWon;
-        } else {
+        } else if(won < 0) {
             graph.loseSituation();
         }
         

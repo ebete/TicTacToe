@@ -25,9 +25,9 @@ public class BotRandom implements Bot {
     }
 
     @Override
-    public void roundEnd(boolean won) {
+    public void roundEnd(int won) {
         ++_roundsPlayed;
-        if(won)
+        if(won > 0)
             ++_roundsWon;
     }
 
