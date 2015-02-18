@@ -62,8 +62,16 @@ public class BotLearning implements Bot {
     @Override
     public void roundEnd(boolean won) {
         ++_roundsPlayed;
-        if(won)
+        if(won) {
+            graph.winSituation();
             ++_roundsWon;
+        } else {
+            graph.loseSituation();
+        }
+        
+        // Reset the graph for the next round.
+        while(graph.getParentNode() != null)
+            graph = graph.getParentNode();
     }
 
     @Override

@@ -77,10 +77,17 @@ public class LearningGraphNode {
 
     /**
      * Returns the node value.
-     * 
+     *
      * @return The node value.
      */
     public long getValue() { return _value; }
+
+    /**
+     * Returns the parent node.
+     *
+     * @return The parent node.
+     */
+    public LearningGraphNode getParentNode() { return _parent; }
 
     /**
      * Call this when the bot won the round.
