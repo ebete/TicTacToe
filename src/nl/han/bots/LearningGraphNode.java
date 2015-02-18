@@ -51,7 +51,7 @@ public class LearningGraphNode {
      * Returns the node with the highest
      * probability of winning in the previous rounds
      * or returns null signalling to do a move that has yet
-     * to be created. This happens if the best node has a value that
+     * to be created. This happens if the best node has a weight that
      * lies below a certain threshold or no nodes are attached.
      * 
      * @return The node with the highest winning rate or {@code null}.
@@ -89,8 +89,9 @@ public class LearningGraphNode {
      * This will increment the weight for each followed node.
      */
     public void winSituation() {
-        // TODO: Add the tree win situation functionality.
-        throw new NotImplementedException();
+        ++_weight;
+        if(_parent != null)
+            _parent.winSituation();
     }
 
     /**
@@ -98,8 +99,9 @@ public class LearningGraphNode {
      * This will decrement the weight for each followed node.
      */
     public void loseSituation() {
-        // TODO: Add the tree lose situation functionality.
-        throw new NotImplementedException();
+        --_weight;
+        if(_parent != null)
+            _parent.loseSituation();
     }
     
     /**
