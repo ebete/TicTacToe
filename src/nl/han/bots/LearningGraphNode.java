@@ -35,8 +35,14 @@ public class LearningGraphNode {
      * @return The node with the value.
      */
     public LearningGraphNode moveToNode(long value) {
-        // TODO: Add move to node implementation.
-        throw new NotImplementedException();
+        for(LearningGraphNode node : _children) {
+            if(node.getValue() == value)
+                return node;
+        }
+        
+        // Node not found.
+        _children.add(new LearningGraphNode(this, value));
+        return moveToNode(value);
     }
 
     /**
