@@ -1,5 +1,7 @@
 package nl.han.tictactoe;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 /**
  * An object for playing a game of Tic Tac Toe.
  *
@@ -83,6 +85,18 @@ public class TicTacToe {
         checkWin(row, column);
         togglePlayer();
         return true;
+    }
+
+    /**
+     * Derives the token to place from the given
+     * value of the new board.
+     * 
+     * @param newBoard The board value to create.
+     * @return true if the action was successful, otherwise false.
+     */
+    public boolean place(long newBoard) {
+        // TODO: Create the function body.
+        throw new NotImplementedException();
     }
 
     /**

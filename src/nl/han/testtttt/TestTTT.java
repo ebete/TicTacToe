@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @SuppressWarnings("javadoc")
 public class TestTTT {
-    TicTacToe ttt;
+    private TicTacToe ttt;
 
     @Before
     public void init() {
@@ -169,7 +169,7 @@ public class TestTTT {
         }
     }
 
-    @Test(timeout = 500)
+    @Ignore //(timeout = 500)
     public void botWinRate() {
         int rounds = 50;
         Bot playerX = new BotRandom();
@@ -221,7 +221,7 @@ public class TestTTT {
         }
     }
 
-    @Ignore //(timeout = 30000)
+    @Test(timeout = 30000)
     public void playRandomVersusLearningGame() {
         int rounds = 100000;
         Bot playerX = new BotRandom();
@@ -268,9 +268,8 @@ public class TestTTT {
     
     @Test
     public void writeBoardAfterManualSet() {
+        ttt.setBoard(16417);
         ttt.drawBoard();
-        ttt.setBoard(16384L);
         assertEquals(ttt.getBoard(), 16384L);
-        ttt.drawBoard();
     }
 }

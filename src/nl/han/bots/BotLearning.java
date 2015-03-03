@@ -30,7 +30,6 @@ public class BotLearning implements Bot {
 
     @Override
     public void doMove(TicTacToe game) {
-        //TODO: Finalize implementation for move calculation.
         if(game.getBoard() != 0L)
             graph = graph.moveToNode(game.getBoard());
 
@@ -39,18 +38,17 @@ public class BotLearning implements Bot {
             graph = graph.moveToNode(game.getBoard());
         } else {
             graph = graph.calculateBestMove();
+            game.place(graph.getValue());
         }
     }
 
     /**
-     * Export the tree to a file.
+     * Exports the tree to the file {@code learning_graph.txt}.
      *
      * @return True on success, otherwise false.
      */
     public void exportTree() throws IOException {
-        // TODO: Add the tree export functionality.
-        //throw new NotImplementedException();
-        
+        // TODO: Finalize the tree export functionality.
         
         if(graph.getParentNode() != null)
             graph = graph.getParentNode();
