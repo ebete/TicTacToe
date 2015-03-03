@@ -122,13 +122,13 @@ public class TicTacToe {
                     return false;
                 
                 // Derives the position.
-                row = (pos/2) / BOARD_DIMS;
-                col = (pos/2) % BOARD_DIMS;
+                row = (pos/2) % BOARD_DIMS;
+                col = (pos/2) / BOARD_DIMS;
                 singleChange = true;
             }
         }
         
-        if(place(col, row))
+        if(place(row, col))
             return true;
         return false;
     }
