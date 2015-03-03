@@ -3,6 +3,7 @@ package nl.han.testtttt;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.han.tictactoe.*;
@@ -220,7 +221,7 @@ public class TestTTT {
         }
     }
 
-    @Test(timeout = 30000)
+    @Ignore //(timeout = 30000)
     public void playRandomVersusLearningGame() {
         int rounds = 100000;
         Bot playerX = new BotRandom();
@@ -263,5 +264,13 @@ public class TestTTT {
         System.out.println(String.format("%s vs %s game x%d:", playerX.getName(), playerO.getName(), rounds));
         System.out.println(String.format("Bot X win rate: %.1f%%", playerX.getWinRate()*100));
         System.out.println(String.format("Bot O win rate: %.1f%%", playerO.getWinRate()*100));
+    }
+    
+    @Test
+    public void writeBoardAfterManualSet() {
+        ttt.drawBoard();
+        ttt.setBoard(16384L);
+        assertEquals(ttt.getBoard(), 16384L);
+        ttt.drawBoard();
     }
 }

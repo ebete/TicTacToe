@@ -143,6 +143,16 @@ public class TicTacToe {
             return State.O;
         return State.BLANK;
     }
+    
+    private String getStringToken(int row, int column) {
+        int pos = getPosition(row, column);
+
+        if(pos == _x)
+            return "X";
+        if(pos == _o)
+            return "O";
+        return " ";
+    }
 
     /**
      * Checks for a win situation on the last move.
@@ -211,6 +221,19 @@ public class TicTacToe {
         return _board;
     }
 
+    /**
+     * Sets the board to the given state value.
+     * It will reset all stats and set
+     * the win state to {@code State.DRAW}.
+     * 
+     * @param board The board state value.
+     */
+    public void setBoard(long board) {
+        resetBoard();
+        _board = board;
+        _winner = State.DRAW;
+    }
+
     /** @return The current player. */
     public State getCurrentPlayer() {
         return _currentPlayer;
@@ -224,5 +247,27 @@ public class TicTacToe {
     /** @return The winner. */
     public State getWinner() {
         return _winner;
+    }
+    
+    /** Draws the board in de stdout. */
+    public void drawBoard() {
+        for(int i = 0; i < BOARD_DIMS; i++) {
+            System.out.print("+---+---+---+\n|");
+            for(int j = 0; j < BOARD_DIMS; j++) {
+                System.out.print(String.format(" %s |", getStringToken(j, i)));
+            }
+            System.out.println();
+        }
+        System.out.println("+---+---+---+");
+    }
+
+    @Override
+    public String toString() {
+        return String.format("TicTacToe {Dims=%d; Winner=%s; Turn=%s; Moves=%d; Board=%d}",
+                BOARD_DIMS,
+                _winner,
+                _currentPlayer,
+                _moves,
+                _board);
     }
 }
