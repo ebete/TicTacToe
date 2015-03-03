@@ -168,10 +168,11 @@ public class TestTTT {
 
     @Test(timeout = 500)
     public void botWinRate() {
+        int rounds = 50;
         Bot playerX = new BotRandom();
         Bot playerO = new BotRandom();
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < rounds; i++) {
             while(ttt.getWinner() == State.BLANK) {
                 if(ttt.getCurrentPlayer() == State.X)
                     playerX.doMove(ttt);
@@ -199,7 +200,7 @@ public class TestTTT {
             ttt.resetBoard();
         }
 
-        System.out.println(String.format("%s vs %s game:", playerX.getName(), playerO.getName()));
+        System.out.println(String.format("%s vs %s game x%d:", playerX.getName(), playerO.getName(), rounds));
         System.out.println(String.format("Bot X win rate: %.1f%%", playerX.getWinRate()*100));
         System.out.println(String.format("Bot O win rate: %.1f%%", playerO.getWinRate()*100));
     }
@@ -219,10 +220,11 @@ public class TestTTT {
 
     @Test(timeout = 30000)
     public void playRandomVersusLearningGame() {
+        int rounds = 100000;
         Bot playerX = new BotRandom();
         Bot playerO = new BotLearning();
 
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < rounds; i++) {
             while(ttt.getWinner() == State.BLANK) {
                 if(ttt.getCurrentPlayer() == State.X)
                     playerX.doMove(ttt);
@@ -250,7 +252,7 @@ public class TestTTT {
             ttt.resetBoard();
         }
 
-        System.out.println(String.format("%s vs %s game:", playerX.getName(), playerO.getName()));
+        System.out.println(String.format("%s vs %s game x%d:", playerX.getName(), playerO.getName(), rounds));
         System.out.println(String.format("Bot X win rate: %.1f%%", playerX.getWinRate()*100));
         System.out.println(String.format("Bot O win rate: %.1f%%", playerO.getWinRate()*100));
     }
