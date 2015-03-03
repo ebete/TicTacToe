@@ -10,6 +10,9 @@ import java.util.Random;
  * @author Thom Griffioen
  */
 public class BotRandom implements Bot {
+    private int _roundsPlayed = 0;
+    private int _roundsWon = 0;
+    
     @Override
     public void doMove(TicTacToe game) {
         int row;
@@ -19,6 +22,18 @@ public class BotRandom implements Bot {
             row = new Random().nextInt(game.BOARD_DIMS);
             col = new Random().nextInt(game.BOARD_DIMS);
         } while(!game.place(row, col));
+    }
+
+    @Override
+    public void roundEnd(int won) {
+        ++_roundsPlayed;
+        if(won > 0)
+            ++_roundsWon;
+    }
+
+    @Override
+    public float getWinRate() {
+        return (float)_roundsWon / (float)_roundsPlayed;
     }
 
     @Override

@@ -3,6 +3,7 @@ package nl.han.testtttt;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.han.tictactoe.*;
@@ -10,9 +11,11 @@ import nl.han.tictactoe.TicTacToe.State;
 
 import nl.han.bots.*;
 
+import java.io.IOException;
+
 @SuppressWarnings("javadoc")
 public class TestTTT {
-    TicTacToe ttt;
+    private TicTacToe ttt;
 
     @Before
     public void init() {
@@ -159,10 +162,114 @@ public class TestTTT {
         Bot playerO = new BotRandom();
 
         while(ttt.getWinner() == State.BLANK) {
-            if (ttt.getCurrentPlayer() == State.X)
+            if(ttt.getCurrentPlayer() == State.X)
                 playerX.doMove(ttt);
             else
                 playerO.doMove(ttt);
         }
+    }
+
+    @Test(timeout = 500)
+    public void botWinRate() {
+        int rounds = 50;
+        Bot playerX = new BotRandom();
+        Bot playerO = new BotRandom();
+
+        for (int i = 0; i < rounds; i++) {
+            while(ttt.getWinner() == State.BLANK) {
+                if(ttt.getCurrentPlayer() == State.X)
+                    playerX.doMove(ttt);
+                else
+                    playerO.doMove(ttt);
+            }
+
+            switch(ttt.getWinner()) {
+                case X:
+                    playerX.roundEnd(1);
+                    playerO.roundEnd(-1);
+                    break;
+
+                case O:
+                    playerX.roundEnd(-1);
+                    playerO.roundEnd(1);
+                    break;
+
+                case DRAW:
+                    playerX.roundEnd(0);
+                    playerO.roundEnd(0);
+                    break;
+            }
+            
+            ttt.resetBoard();
+        }
+
+        System.out.println(String.format("%s vs %s game x%d:", playerX.getName(), playerO.getName(), rounds));
+        System.out.println(String.format("Bot X win rate: %.1f%%", playerX.getWinRate()*100));
+        System.out.println(String.format("Bot O win rate: %.1f%%", playerO.getWinRate()*100));
+    }
+
+    @Test(timeout = 50)
+    public void playRandomLearningBotGame() {
+        Bot playerX = new BotRandom();
+        Bot playerO = new BotLearning();
+
+        while(ttt.getWinner() == State.BLANK) {
+            if(ttt.getCurrentPlayer() == State.X)
+                playerX.doMove(ttt);
+            else
+                playerO.doMove(ttt);
+        }
+    }
+
+    @Test(timeout = 30000)
+    public void playRandomVersusLearningGameAndExport() {
+        int rounds = 1000000;
+        Bot playerX = new BotRandom();
+        Bot playerO = new BotLearning();
+
+        for (int i = 0; i < rounds; i++) {
+            while(ttt.getWinner() == State.BLANK) {
+                if(ttt.getCurrentPlayer() == State.X)
+                    playerX.doMove(ttt);
+                else
+                    playerO.doMove(ttt);
+            }
+            
+            switch(ttt.getWinner()) {
+                case X:
+                    playerX.roundEnd(1);
+                    playerO.roundEnd(-1);
+                    break;
+
+                case O:
+                    playerX.roundEnd(-1);
+                    playerO.roundEnd(1);
+                    break;
+
+                case DRAW:
+                    playerX.roundEnd(0);
+                    playerO.roundEnd(0);
+                    break;
+            }
+
+            ttt.resetBoard();
+        }
+
+        try {
+            ((BotLearning) playerO).exportTree();
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail();
+        }
+        System.out.println(String.format("%s vs %s game x%d:", playerX.getName(), playerO.getName(), rounds));
+        System.out.println(String.format("Bot X win rate: %.1f%%", playerX.getWinRate()*100));
+        System.out.println(String.format("Bot O win rate: %.1f%%", playerO.getWinRate()*100));
+    }
+    
+    @Test
+    public void writeBoardAfterManualSet() {
+        ttt.setBoard(16417L);
+        ttt.drawBoard();
+        assertEquals(ttt.getBoard(), 16417L);
     }
 }
