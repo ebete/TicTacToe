@@ -95,6 +95,13 @@ public class LearningGraphNode {
     public LearningGraphNode getParentNode() { return _parent; }
 
     /**
+     * Returns the children of the node in an {@code ArrayList}.
+     * 
+     * @return The children of the node.
+     */
+    public ArrayList<LearningGraphNode> getChildren() { return _children; }
+
+    /**
      * Call this when the bot won the round.
      * This will increment the weight for each followed node.
      */
@@ -112,5 +119,13 @@ public class LearningGraphNode {
         --_weight;
         if(_parent != null)
             _parent.loseSituation();
+    }
+
+    @Override
+    public String toString() {
+        return "LearningGraphNode{" +
+                "_weight=" + _weight +
+                ", _value=" + _value +
+                '}';
     }
 }

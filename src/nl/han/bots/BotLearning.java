@@ -3,6 +3,8 @@ package nl.han.bots;
 import nl.han.tictactoe.TicTacToe;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -45,9 +47,25 @@ public class BotLearning implements Bot {
      *
      * @return True on success, otherwise false.
      */
-    private boolean exportTree() {
+    public void exportTree() throws IOException {
         // TODO: Add the tree export functionality.
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+        
+        
+        if(graph.getParentNode() != null)
+            graph = graph.getParentNode();
+
+        FileWriter fw = new FileWriter("learning_graph.txt");
+        fw.write("0: " + graph + '\n');
+        iterateTree(graph, 1, fw);
+        fw.close();
+    }
+    
+    private void iterateTree(LearningGraphNode node, int depth, FileWriter fw) throws IOException {
+        for(LearningGraphNode child : node.getChildren()) {
+            fw.write(depth + ": " + child + '\n');
+            iterateTree(child, depth+1, fw);
+        }
     }
 
     /**
@@ -55,7 +73,7 @@ public class BotLearning implements Bot {
      *
      * @return True on success, otherwise false.
      */
-    private boolean importTree() {
+    private void importTree() {
         // TODO: Add the tree import functionality.
         throw new NotImplementedException();
     }

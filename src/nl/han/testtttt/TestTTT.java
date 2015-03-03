@@ -10,6 +10,8 @@ import nl.han.tictactoe.TicTacToe.State;
 
 import nl.han.bots.*;
 
+import java.io.IOException;
+
 @SuppressWarnings("javadoc")
 public class TestTTT {
     TicTacToe ttt;
@@ -252,6 +254,12 @@ public class TestTTT {
             ttt.resetBoard();
         }
 
+        try {
+            ((BotLearning) playerO).exportTree();
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail();
+        }
         System.out.println(String.format("%s vs %s game x%d:", playerX.getName(), playerO.getName(), rounds));
         System.out.println(String.format("Bot X win rate: %.1f%%", playerX.getWinRate()*100));
         System.out.println(String.format("Bot O win rate: %.1f%%", playerO.getWinRate()*100));
