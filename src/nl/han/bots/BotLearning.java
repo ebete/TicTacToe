@@ -38,7 +38,8 @@ public class BotLearning implements Bot {
             graph = graph.moveToNode(game.getBoard());
         } else {
             graph = graph.calculateBestMove();
-            game.place(graph.getValue());
+            if(!game.place(graph.getValue()))
+                System.out.println("Place derivation failed miserably.");
         }
     }
 

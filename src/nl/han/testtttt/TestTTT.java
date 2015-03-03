@@ -169,7 +169,7 @@ public class TestTTT {
         }
     }
 
-    @Ignore //(timeout = 500)
+    @Test(timeout = 500)
     public void botWinRate() {
         int rounds = 50;
         Bot playerX = new BotRandom();
@@ -222,8 +222,8 @@ public class TestTTT {
     }
 
     @Test(timeout = 30000)
-    public void playRandomVersusLearningGame() {
-        int rounds = 100000;
+    public void playRandomVersusLearningGameAndExport() {
+        int rounds = 1000000;
         Bot playerX = new BotRandom();
         Bot playerO = new BotLearning();
 
@@ -268,8 +268,8 @@ public class TestTTT {
     
     @Test
     public void writeBoardAfterManualSet() {
-        ttt.setBoard(16417);
+        ttt.setBoard(16417L);
         ttt.drawBoard();
-        assertEquals(ttt.getBoard(), 16384L);
+        assertEquals(ttt.getBoard(), 16417L);
     }
 }

@@ -74,6 +74,11 @@ public class TicTacToe {
      * @return true if the action was successful, otherwise false.
      */
     public boolean place(int row, int column) {
+        if(row < 0 || row >= BOARD_DIMS)
+            return false;
+        if(column < 0 || column >= BOARD_DIMS)
+            return false;
+        
         if(!positionEmpty(row, column))
             return false;
 
@@ -95,8 +100,37 @@ public class TicTacToe {
      * @return true if the action was successful, otherwise false.
      */
     public boolean place(long newBoard) {
-        // TODO: Create the function body.
-        throw new NotImplementedException();
+        // No change.
+        if(newBoard == _board)
+            return false;
+        
+        boolean singleChange = false;
+        
+        int row = -1;
+        int col = -1;
+        
+        for(int pos = 0; pos < Math.pow(BOARD_DIMS, 2)*2; pos+=2) {
+            long mask = 0b11 << pos;
+            int curVal = (int) ((newBoard & mask) >> pos);
+            if((int) ((_board & mask) >> pos) != curVal) {
+                // Checks if this is the only required board change.
+                if(singleChange)
+                    return false;
+                
+                // Checks if the found player equals the current player.
+                if(curVal != getCurrentPlayerAsInt())
+                    return false;
+                
+                // Derives the position.
+                row = (pos/2) / BOARD_DIMS;
+                col = (pos/2) % BOARD_DIMS;
+                singleChange = true;
+            }
+        }
+        
+        if(place(col, row))
+            return true;
+        return false;
     }
 
     /**
@@ -251,6 +285,18 @@ public class TicTacToe {
     /** @return The current player. */
     public State getCurrentPlayer() {
         return _currentPlayer;
+    }
+
+    /** @return The integer representation of the current player. */
+    private int getCurrentPlayerAsInt() {
+        switch(_currentPlayer) {
+            case O:
+                return _o;
+            case X:
+                return _x;
+            default:
+                return _blank;
+        }
     }
 
     /** @return The move count. */
