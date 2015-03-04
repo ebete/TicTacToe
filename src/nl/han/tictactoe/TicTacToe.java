@@ -1,7 +1,5 @@
 package nl.han.tictactoe;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  * An object for playing a game of Tic Tac Toe.
  *
