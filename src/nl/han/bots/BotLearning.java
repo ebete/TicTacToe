@@ -12,10 +12,7 @@ import java.util.Random;
  *
  * @author Thom Griffioen
  */
-public class BotLearning implements Bot {
-    private int _roundsPlayed = 0;
-    private int _roundsWon = 0;
-    
+public class BotLearning extends Bot {
     private LearningGraphNode graph = new LearningGraphNode(null, 0L);
 
     private void randomMove(TicTacToe game) {
@@ -79,10 +76,10 @@ public class BotLearning implements Bot {
 
     @Override
     public void roundEnd(int won) {
-        ++_roundsPlayed;
+        ++roundsPlayed;
         if(won > 0) {
             graph.winSituation();
-            ++_roundsWon;
+            ++roundsWon;
         } else if(won < 0) {
             graph.loseSituation();
         }
@@ -90,11 +87,6 @@ public class BotLearning implements Bot {
         // Reset the graph for the next round.
         while(graph.getParentNode() != null)
             graph = graph.getParentNode();
-    }
-
-    @Override
-    public float getWinRate() {
-        return (float)_roundsWon / (float)_roundsPlayed;
     }
 
     @Override
