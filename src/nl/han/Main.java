@@ -1,6 +1,5 @@
 package nl.han;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**

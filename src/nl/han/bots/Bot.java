@@ -3,7 +3,7 @@ package nl.han.bots;
 import nl.han.tictactoe.TicTacToe;
 
 /**
- * Interface used by all bots.
+ * Base class for all bots.
  *
  * @author Thom Griffioen
  */

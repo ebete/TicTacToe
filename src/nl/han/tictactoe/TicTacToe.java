@@ -180,7 +180,7 @@ public class TicTacToe {
      * @param column The cell column.
      * @return The token at the requested position.
      */
-    private State getToken(int row, int column) {
+    public State getToken(int row, int column) {
         int pos = getPosition(row, column);
 
         if(pos == _x)
@@ -190,7 +190,7 @@ public class TicTacToe {
         return State.BLANK;
     }
     
-    private String getStringToken(int row, int column) {
+    public String getStringToken(int row, int column) {
         int pos = getPosition(row, column);
 
         if(pos == _x)
