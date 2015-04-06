@@ -47,6 +47,7 @@ public class GameForm extends JFrame {
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                setTitle("Tic Tac Toe - Bot learning factor: " + playerO.getRoundsPlayed());
                 boolean validmove = false;
 
                 if(e.getSource() == button1)
@@ -68,13 +69,20 @@ public class GameForm extends JFrame {
                 else if(e.getSource() == button9)
                     validmove = ttt.place(2, 2);
 
-                if(validmove) {
-                    if(ttt.getWinner() != TicTacToe.State.BLANK) {
-                        JOptionPane.showMessageDialog(pnlRoot, "The winner is: "+ttt.getWinner(), "Round end!", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        playerO.doMove(ttt);
-                    }
-                    drawGame();
+                if(!validmove)
+                    return;
+
+                drawGame();
+                if(ttt.getWinner() != TicTacToe.State.BLANK) {
+                    JOptionPane.showMessageDialog(pnlRoot, "The winner is: "+ttt.getWinner(), "Round end!", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+
+                playerO.doMove(ttt);
+                drawGame();
+                if(ttt.getWinner() != TicTacToe.State.BLANK) {
+                    JOptionPane.showMessageDialog(pnlRoot, "The winner is: "+ttt.getWinner(), "Round end!", JOptionPane.INFORMATION_MESSAGE);
+                    return;
                 }
             }
         };
@@ -137,6 +145,20 @@ public class GameForm extends JFrame {
         resetBoardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                switch(ttt.getWinner()) {
+                    case X:
+                        playerO.roundEnd(-1);
+                        break;
+
+                    case O:
+                        playerO.roundEnd(1);
+                        break;
+
+                    case DRAW:
+                        playerO.roundEnd(0);
+                        break;
+                }
+
                 ttt.resetBoard();
                 drawGame();
             }
