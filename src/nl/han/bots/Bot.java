@@ -31,6 +31,15 @@ abstract public class Bot {
     }
 
     /**
+     * Gets the number of rounds the bot has finished.
+     *
+     * @return Number of finished rounds.
+     */
+    public int getRoundsPlayed() {
+        return this.roundsPlayed;
+    }
+
+    /**
      * Returns the win rate of the bot.
      *
      * @return The win rate.

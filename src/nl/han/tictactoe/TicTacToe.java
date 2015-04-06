@@ -227,7 +227,7 @@ public class TicTacToe {
             }
         }
 
-        if(row == column) {
+        if(row == column || row == BOARD_DIMS-1-column) {
             // Check diagonal win.
             for(int i = 0; i < BOARD_DIMS; i++) {
                 if(getToken(i, i) != _currentPlayer)
