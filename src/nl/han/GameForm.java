@@ -47,7 +47,35 @@ public class GameForm extends JFrame {
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                boolean validmove = false;
 
+                if(e.getSource() == button1)
+                    validmove = ttt.place(0, 0);
+                else if(e.getSource() == button2)
+                    validmove = ttt.place(0, 1);
+                else if(e.getSource() == button3)
+                    validmove = ttt.place(0, 2);
+                else if(e.getSource() == button4)
+                    validmove = ttt.place(1, 0);
+                else if(e.getSource() == button5)
+                    validmove = ttt.place(1, 1);
+                else if(e.getSource() == button6)
+                    validmove = ttt.place(1, 2);
+                else if(e.getSource() == button7)
+                    validmove = ttt.place(2, 0);
+                else if(e.getSource() == button8)
+                    validmove = ttt.place(2, 1);
+                else if(e.getSource() == button9)
+                    validmove = ttt.place(2, 2);
+
+                if(validmove) {
+                    if(ttt.getWinner() != TicTacToe.State.BLANK) {
+                        JOptionPane.showMessageDialog(pnlRoot, "The winner is: "+ttt.getWinner(), "Round end!", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        playerO.doMove(ttt);
+                    }
+                    drawGame();
+                }
             }
         };
 
