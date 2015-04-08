@@ -78,6 +78,7 @@ public class BotLearning extends Bot {
             ++roundsWon;
         } else if(won < 0) {
             graph.loseSituation();
+            ++roundsLost;
         }
         
         // Reset the graph for the next round.
