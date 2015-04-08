@@ -17,8 +17,8 @@ public class BotRandom extends Bot {
         int col;
 
         do {
-            row = new Random().nextInt(game.BOARD_DIMS);
-            col = new Random().nextInt(game.BOARD_DIMS);
+            row = new Random().nextInt(TicTacToe.BOARD_DIMS);
+            col = new Random().nextInt(TicTacToe.BOARD_DIMS);
         } while(!game.place(row, col));
     }
 
