@@ -24,7 +24,13 @@ public class TicTacToe {
     }
 
     /** Dimensions of the board. */
-    public final byte BOARD_DIMS = 3;
+    public static final byte BOARD_DIMS = 3;
+    /** The 2 bit representation of a blank cell. */
+    private static final int _blank = 0b00;
+    /** The 2 bit representation of the token X. */
+    private static final int _x = 0b01;
+    /** The 2 bit representation of the token O. */
+    private static final int _o = 0b10;
 
     /** The current player. */
     private State _currentPlayer = State.X;
@@ -34,13 +40,6 @@ public class TicTacToe {
     private short _moves = 0;
     /** The unique board state value. */
     private long _board = 0;
-
-    /** The 2 bit representation of a blank cell. */
-    private final int _blank = 0b00;
-    /** The 2 bit representation of the token X. */
-    private final int _x = 0b01;
-    /** The 2 bit representation of the token O. */
-    private final int _o = 0b10;
 
     /**
      * Initializes the gameboard with the size of {@code BOARD_DIMS}.
