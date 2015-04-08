@@ -12,10 +12,17 @@ public class TicTacToe {
      *
      * @author Thom Griffioen
      */
-    public enum State {/** Empty */  BLANK, // 0b00
-                       /** Cross */  X,     // 0b01
-                       /** Circle */ O,     // 0b10
-                       /** Draw */   DRAW};
+    public enum State {
+        /** Empty */  // 0b00
+        BLANK,
+        /** Cross */  // 0b01
+        X,
+        /** Circle */ // 0b10
+        O,
+        /** Draw */
+        DRAW
+    }
+
     /** Dimensions of the board. */
     public final byte BOARD_DIMS = 3;
 
@@ -126,9 +133,7 @@ public class TicTacToe {
             }
         }
         
-        if(place(row, col))
-            return true;
-        return false;
+        return place(row, col);
     }
 
     /**
