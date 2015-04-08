@@ -221,6 +221,13 @@ public class TestTTT {
         }
     }
 
+    @Test
+    public void writeBoardAfterManualSet() {
+        ttt.setBoard(16417L);
+        ttt.drawBoard();
+        assertEquals(ttt.getBoard(), 16417L);
+    }
+
     @Test(timeout = 30000)
     public void playRandomVersusLearningGameAndExport() {
         int rounds = 1000000;
@@ -262,14 +269,46 @@ public class TestTTT {
             fail();
         }
         System.out.println(String.format("%s vs %s game x%d:", playerX.getName(), playerO.getName(), rounds));
-        System.out.println(String.format("Bot X win rate: %.1f%%", playerX.getWinRate()*100));
-        System.out.println(String.format("Bot O win rate: %.1f%%", playerO.getWinRate()*100));
+        System.out.println(String.format("Bot X win rate: %.1f%%", playerX.getWinRate() * 100));
+        System.out.println(String.format("Bot O win rate: %.1f%%", playerO.getWinRate() * 100));
     }
-    
-    @Test
-    public void writeBoardAfterManualSet() {
-        ttt.setBoard(16417L);
-        ttt.drawBoard();
-        assertEquals(ttt.getBoard(), 16417L);
+
+    @Test(timeout = 30000)
+    public void playLearningVersusLearningGame() {
+        int rounds = 1000000;
+        Bot playerX = new BotLearning();
+        Bot playerO = new BotLearning();
+
+        for (int i = 0; i < rounds; i++) {
+            while(ttt.getWinner() == State.BLANK) {
+                if(ttt.getCurrentPlayer() == State.X)
+                    playerX.doMove(ttt);
+                else
+                    playerO.doMove(ttt);
+            }
+
+            switch(ttt.getWinner()) {
+                case X:
+                    playerX.roundEnd(1);
+                    playerO.roundEnd(-1);
+                    break;
+
+                case O:
+                    playerX.roundEnd(-1);
+                    playerO.roundEnd(1);
+                    break;
+
+                case DRAW:
+                    playerX.roundEnd(0);
+                    playerO.roundEnd(0);
+                    break;
+            }
+
+            ttt.resetBoard();
+        }
+
+        System.out.println(String.format("%s vs %s game x%d:", playerX.getName(), playerO.getName(), rounds));
+        System.out.println(String.format("Bot X win rate: %.1f%%", playerX.getWinRate() * 100));
+        System.out.println(String.format("Bot O win rate: %.1f%%", playerO.getWinRate() * 100));
     }
 }
