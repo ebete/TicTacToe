@@ -42,8 +42,6 @@ public class BotLearning extends Bot {
 
     /**
      * Exports the tree to the file {@code learning_graph.txt}.
-     *
-     * @return True on success, otherwise false.
      */
     public void exportTree() throws IOException {
         // TODO: Finalize the tree export functionality.
@@ -66,8 +64,6 @@ public class BotLearning extends Bot {
 
     /**
      * Import the tree from a file.
-     *
-     * @return True on success, otherwise false.
      */
     private void importTree() {
         // TODO: Add the tree import functionality.
