@@ -29,6 +29,7 @@ public class GameForm extends JFrame {
 
     private TicTacToe ttt;
     private Bot playerO;
+    private static Bot trainingBot = new BotRandom();
 
     public GameForm() {
         initializeComponents();
@@ -102,29 +103,28 @@ public class GameForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 trainBotButton.setText("Training...");
                 int rounds = 100000;
-                Bot playerX = new BotRandom();
 
                 for (int i = 0; i < rounds; i++) {
                     while(ttt.getWinner() == TicTacToe.State.BLANK) {
                         if(ttt.getCurrentPlayer() == TicTacToe.State.X)
-                            playerX.doMove(ttt);
+                            trainingBot.doMove(ttt);
                         else
                             playerO.doMove(ttt);
                     }
 
                     switch(ttt.getWinner()) {
                         case X:
-                            playerX.roundEnd(1);
+                            trainingBot.roundEnd(1);
                             playerO.roundEnd(-1);
                             break;
 
                         case O:
-                            playerX.roundEnd(-1);
+                            trainingBot.roundEnd(-1);
                             playerO.roundEnd(1);
                             break;
 
                         case DRAW:
-                            playerX.roundEnd(0);
+                            trainingBot.roundEnd(0);
                             playerO.roundEnd(0);
                             break;
                     }

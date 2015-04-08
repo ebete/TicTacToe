@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class LearningGraphNode {
     /** The weight cutoff value when deciding the best node. */
-    private final int WEIGHT_CUTOFF = -50;
+    private static final int WEIGHT_CUTOFF = 9;
 
     /** The parent node of this node. */
     private LearningGraphNode _parent = null;
