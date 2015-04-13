@@ -106,8 +106,9 @@ public class LearningGraphNode {
      * This will increment the weight for each followed node.
      */
     public void winSituation() {
-        ++_weight;
-        if(_parent != null)
+        int depth = getDepth();
+        _weight += depth;
+        if(depth > 1)
             _parent.winSituation();
     }
 
@@ -116,16 +117,34 @@ public class LearningGraphNode {
      * This will decrement the weight for each followed node.
      */
     public void loseSituation() {
-        --_weight;
-        if(_parent != null)
+        int depth = getDepth();
+        _weight -= depth;
+        if(depth > 1)
             _parent.loseSituation();
+    }
+
+    /**
+     * Gets the level of the current node, starting with 1.
+     * (e.g. The root node has a depth of 1, a node lower 2, etc...)
+     *
+     * @return The depth of the current node.
+     */
+    private int getDepth() {
+        int depth = 1;
+        LearningGraphNode lgn = this;
+        while(lgn.getParentNode() != null) {
+            lgn = lgn.getParentNode();
+            ++depth;
+        }
+
+        return depth;
     }
 
     @Override
     public String toString() {
-        return "LearningGraphNode{" +
-                "_weight=" + _weight +
-                ", _value=" + _value +
-                '}';
+        return String.format("LearningGraphNode {_weight=%d; _value=%d; depth=%d}",
+                _weight,
+                _value,
+                getDepth());
     }
 }
